@@ -1,88 +1,69 @@
-<h4>Validación de Formularios <small>Lado del Reactive</small></h4>
+<h1 class="text-white">Crear Usuario</h1>
 <hr>
-<form autocomplete="off" [formGroup]="form" (ngSubmit)="enviar()">
+<form autocomplete="off" [formGroup]="form" (ngSubmit)="enviar()" class="center">
     <div>
 <!-- ++++++++++++++++++++++++++ Primer input ++++++++++++++++++++++ -->
         <div class="form-group row">
-            <label for="nombre" class="col-2 col-form-label">Nombre</label>
+            <label for="nombre" class="col-2 col-form-label text-white font-weight-bold">Nombre</label>
             <div class="col-8">
                 <input type="text" class="form-control" placeholder="Nombre" formControlName="nombre" [class.is-invalid]="validNombre">
-                <div *ngIf="validNombre" class="invalid-feedback">Dato erroneo</div>
+                <div *ngIf="validNombre" class="invalid-feedback badge badge-danger">Dato erroneo</div>
             </div>
         </div>
 <!-- ++++++++++++++++++++++++++ Segundo input ++++++++++++++++++++++ -->
         <div class="form-group row">
-            <label for="apellido" class="col-2 col-form-label">Apellido</label>
+            <label for="apellido" class="col-2 col-form-label text-white font-weight-bold">Apellido</label>
             <div class="col-8">
                 <input type="text" class="form-control" placeholder="Apellido" formControlName="apellido" [class.is-invalid]="validApellido">
-                <div *ngIf="validApellido" class="invalid-feedback">Dato erroneo</div>
+                <div *ngIf="validApellido" class="invalid-feedback badge badge-danger">Dato erroneo</div>
             </div>
         </div>
 <!-- ++++++++++++++++++++++++++ Tercer input ++++++++++++++++++++++ -->
         <div class="form-group row">
-            <label for="email" class="col-2 col-form-label">Email</label>
+            <label for="email" class="col-2 col-form-label text-white font-weight-bold">Email</label>
             <div class="col-8">
                 <input type="email" class="form-control" placeholder="Email" formControlName="correo" [class.is-invalid]="validCorreo">
-                <div *ngIf="validCorreo" class="invalid-feedback">Dato erroneo</div>
+                <div *ngIf="validCorreo" class="invalid-feedback badge badge-danger">Dato erroneo</div>
+            </div>
+        </div>
+<!-- ++++++++++++++++++++++++++ Segundo input ++++++++++++++++++++++ -->
+        <div class="form-group row">
+            <label for="trabajo" class="col-2 col-form-label text-white font-weight-bold">Trabajo</label>
+            <div class="col-8">
+                <input type="text" class="form-control" placeholder="Role de trabajo" formControlName="role" [class.is-invalid]="validTrabajo">
+                <div *ngIf="validTrabajo" class="invalid-feedback badge badge-danger">Dato erroneo</div>
             </div>
         </div>
 <!-- ++++++++++++++++++++++++++ Grupo de controles ++++++++++++++++++++++ -->
         <div class="form-group row" formGroupName="direccion">
-            <label for="" class="col-2 col-form-label">Dirección</label>
+            <label for="" class="col-2 col-form-label text-white font-weight-bold">Dirección</label>
             <div class="form-row col-8">
                 <div class="col">
                     <input type="" class="form-control" placeholder="Estado" formControlName="estado" [class.is-invalid]="validEstado">
-                    <div *ngIf="validEstado" class="invalid-feedback">Dato erroneo</div>
+                    <div *ngIf="validEstado" class="invalid-feedback badge badge-danger">Dato erroneo</div>
                 </div>
                 <div class="col">
                     <input type="" class="form-control" placeholder="Municipio" formControlName="municipio" [class.is-invalid]="validMun">
-                    <div *ngIf="validMun" class="invalid-feedback">Dato erroneo</div>
+                    <div *ngIf="validMun" class="invalid-feedback badge badge-danger">Dato erroneo</div>
                 </div>
                 
             </div>
         </div>
 <!-- ++++++++++++++++++++++++++ Validación personalizada Password ++++++++++++++++++++++ -->
         <div class="row form-group">
-            <label for="" class="col-2 col-form-label"> Contraseña</label>
+            <label for="" class="col-2 col-form-label text-white font-weight-bold"> Contraseña</label>
             <div class="col-8">
                 <input type="text" class="form-control" placeholder="Contraseña" formControlName="pass1" [class.is-invalid]="Pass1">
             </div>
         </div>
         <div class="row form-group">
-            <label for="" class="col-2 col-form-label">Confirmar Contraseña</label>
+            <label for="" class="col-2 col-form-label text-white font-weight-bold">Confirmar Contraseña</label>
             <div class="col-8">
                 <input type="text" class="form-control" placeholder="Confirmar Contraseña" formControlName="pass2" [class.is-invalid]="Pass2">
             </div>
         </div>
 
-<!-- ++++++++++++++++++++++++++ Arreglo de controles (FormArray) ++++++++++++++++++++++ -->
-        <div class="row">
-            <div class="col-10">
-                <table class="table">
-                    <thead class="table-dark">
-                        <tr>
-                            <th>Id</th>
-                            <th>Pasatiempo</th>
-                            <th>Acciones</th>
-                        </tr>
-                    </thead>
-                    <!-- contenedor de mi FormArray -->
-                    <tbody formArrayName="pasatiempos">
-                        <!-- Reproducir el tr segun la longitud del FormArray -->
-                        <tr *ngFor="let control of arrayPasatiempos.controls; let i = index">
-                            <td>{{ i + 1 }}</td>
-                            <td>
-                                <input type="text" class="form-control" [formControlName]="i" placeholder="Pasatiempo {{ i + 1}}">
-                            </td>
-                            <td>
-                                <button type="button" class="btn btn-danger btn-block" (click)="removeControl(i)">Borrar</button>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-                <button type="button" class="btn btn-primary btn-block my-3" (click)="newControl()">Agregar pasatiempo</button>
-            </div>
-        </div>
+
 <!-- ++++++++++++++++++++++++++ Botón enviar ++++++++++++++++++++++ -->
         <div class="form-group row">
             <!-- <label for="email" class="col-2 col-form-label">Email</label> -->

@@ -1,5 +1,21 @@
-<!-- <div class="row">
+<div>
+<div class="row m-2">
     <div class="col-12">
-        <input class="form-control shadow" type="text" #term (keyup)="buscar(term.value)" placeholder="Buscar Usuario">
+        <input class="form-control shadow" type="text" #term (keyup) ="buscar(term.value)" placeholder="Buscar Usuario (ID)">
     </div>
-</div> -->
+</div> 
+
+<div *ngIf="users" style="display: flex; justify-content: center; text-align: center;">
+    <div class="card text-center" style="width: 18rem;">
+        <img class="card-img-top" [src]="imagen" alt="Busca un Usuario">
+        <div class="card-body">
+          <h4 class="card-title"><span class="badge badge badge-success">Nombre:</span></h4>
+          <p class="card-text font-weight-bold">{{ users }}</p>
+          <h4 class="card-title"><span class="badge badge badge-success">Correo:</span></h4>
+          <p class="card-text font-weight-bold">{{ correo }}</p>
+        </div>
+    </div>
+</div>
+</div>
+
+<!-- #term (keyup)="buscar(term.value)" -->

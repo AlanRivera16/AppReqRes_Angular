@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, FormArray, } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ValidationService } from 'src/app/services/validation/validation.service';
 
 
@@ -24,16 +24,15 @@ export class InsertarComponent implements OnInit {
   get validCorreo(){
     return this.form.get('correo').invalid && this.form.get('correo').touched;
   }
+  get validTrabajo(){
+    return this.form.get('role').invalid && this.form.get('role').touched;
+  }
   //Getters para controles dentro de un formGroup
   get validEstado(){
     return this.form.get('direccion.estado').invalid && this.form.get('direccion.estado').touched;
   }
   get validMun(){
     return this.form.get('direccion.municipio').invalid && this.form.get('direccion.municipio').touched;
-  }
-  //Getters para un FormArray
-  get arrayPasatiempos(){
-    return this.form.get('pasatiempos') as FormArray;
   }
   //Getters para nuestros Password (Validación personalizada)
   get Pass1(){
@@ -58,16 +57,16 @@ export class InsertarComponent implements OnInit {
     this.form = this.fb.group({
       //Primer valor ('') representa el valor por defecto de cada control
       //Como segundo valor estaremos agregando las validaciones
-      nombre: ['', [Validators.required, Validators.minLength(4)],],
+      nombre: ['', [Validators.required, Validators.minLength(3)],],
       apellido: ['', [Validators.required, Validators.minLength(4)]],
       correo: ['', [Validators.required, Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$')]],
+      role: ['', [Validators.required]],
       pass1: ['',Validators.required],
       pass2: ['',Validators.required],
       direccion: this.fb.group({
         estado: ['', [Validators.required, Validators.minLength(3)]],
         municipio: ['', [Validators.required, Validators.minLength(3)]]
       }),
-      pasatiempos: this.fb.array([])
     },{
       validators: this.CustomVal.matchPassword('pass1', 'pass2')
     });
@@ -87,13 +86,5 @@ export class InsertarComponent implements OnInit {
     
   }
 
-   //agregar elementos al FormArray
-   newControl(){
-    this.arrayPasatiempos.push( this.fb.control('', Validators.required));
-  }
-  //para agregar el FFormArray el control seleccionado
-  removeControl(id: number){
-    this.arrayPasatiempos.removeAt(id);
-  }
 
 }

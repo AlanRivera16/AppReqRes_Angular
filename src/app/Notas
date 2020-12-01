@@ -1,0 +1,33 @@
+import { Injectable } from '@angular/core';
+import { HttpClient } from "@angular/common/http";
+
+@Injectable({
+  providedIn: 'root'
+})
+export class AppReqService {
+
+
+  constructor( private http: HttpClient) { }
+
+  public getListData(){
+      return this.http.get('https://reqres.in/api/users?page=2')
+  }
+
+  public search(id: number){
+      if(id === id){
+        return this.http.get(`https://reqres.in/api/users/${id}`).subscribe(id =>{
+          console.log(id);    
+        });
+      }
+  }
+}
+
+ngOnInit(): void {
+    this.AppS.getListData().subscribe((data:any) =>{
+       this.data=data.data;   
+       console.log(data.data);    
+       });
+   }
+
+
+   *ngFor="let listD of data" eso lo puse en el html

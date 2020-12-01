@@ -8,17 +8,20 @@ import { SingelUserService } from 'src/app/services/singel-user.service';
 })
 export class SearchComponent implements OnInit {
 
-  resultados: any = [];
+  users: any[] = [];
+  correo: any[] =[];
+  imagen: '';
+  list: [];
 
   constructor(private SingleUser: SingelUserService) { }
 
-  // buscar(term){
-  //   if(term === '') return this.resultados = [];
-  //   this.SingleUser.getArtists(term).subscribe((data:any)=>{
-  //     //console.log(data.artists.items);
-  //     this.resultados = data;
-  //   });
-  // }
+  buscar(term){
+     this.SingleUser.getQuery(term).subscribe((data:any)=>{
+       this.users = data['data'].first_name;
+       this.correo = data['data'].email;
+       this.imagen = data['data'].avatar;
+     });
+  }
 
   ngOnInit(): void {
   }

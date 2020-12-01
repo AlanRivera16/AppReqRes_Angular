@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { SingelUserService } from 'src/app/services/singel-user.service';
 
 @Component({
   selector: 'app-home',
@@ -7,7 +8,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  constructor() { }
+  users: any[] = [];
+  correo: any[] =[];
+  apellido: any[] =[];
+  imagen: '';
+
+  constructor(private ListUser: SingelUserService) { }
+
+  mostrar(term){
+      this.ListUser.getListUser(term).subscribe((data:any)=> {
+        this.users = data['data'].first_name;
+        console.log('data');
+        
+      })
+  }
 
   ngOnInit(): void {
   }
